@@ -7,3 +7,9 @@
         @apply  bg-black
     }
 }
+
+@layer components{
+    .hoverEffect{
+        @apply hover:bg-[#181818] rounded-full cursor-pointer transition-all duration-300 hover:scale-105 ease-out
+    }
+}

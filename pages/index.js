@@ -1,17 +1,16 @@
-import Head from 'next/head'
-import { Inter } from 'next/font/google'
-import { signOut, useSession } from 'next-auth/react'
-import Login from '@/components/Login';
-import {GoSignOut} from 'react-icons/go'
+import Head from "next/head";
+import { Inter } from "next/font/google";
+import { useSession } from "next-auth/react";
+import Login from "@/components/Login";
+import Sidebar from "@/components/Sidebar";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const { data: session } = useSession();
 
-  const {data:session}=useSession();
+  if (!session) return <Login />;
 
-  if(!session) return <Login/>
-  
   return (
     <>
       <Head>
@@ -20,8 +19,9 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <button className='bg-white p-4 px-6 rounded-[6px] flex gap-3 justify-center items-center' onClick={()=>signOut('google')}>
-      <GoSignOut className='text-[30px] justify-center items-center'/>Sign Out</button>
+      <main className="relative max-w-[1400px] mx-auto">
+        <Sidebar />
+      </main>
     </>
-  )
+  );
 }
